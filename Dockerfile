@@ -1,4 +1,4 @@
-FROM ros:humble-ros-base as BASE
+FROM ubuntu:22.04 as BASE
 
 SHELL ["/bin/bash", "-c"]
 
@@ -15,4 +15,4 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,id=apt \
     wget
 
 # Copy Workspace into the container
-COPY workspace /root/workspace
+# COPY workspace /root/workspace
