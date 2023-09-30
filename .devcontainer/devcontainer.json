@@ -1,0 +1,43 @@
+{
+    "image": "developer_container:latest", // TODO: rename according to image name
+    "remoteUser": "root",
+    "privileged": true,
+    "workspaceMount": "source=${localWorkspaceFolder},target=/root/ros_sensor/src,type=bind,consistency=cached",
+    "workspaceFolder": "/root/ros_sensor/src",
+    "containerEnv": {
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+    "mounts": [
+        { // for build with rosdep installations
+            "source": "/usr/local/share/ca-certificates",
+            "target": "/usr/local/share/ca-certificates",
+            "type": "bind"
+        },
+        { // for build with rosdep installations
+            "source": "/etc/ssl/certs",
+            "target": "/etc/ssl/certs",
+            "type": "bind"
+        }
+    ],
+    "runArgs": [
+        "--cap-add=ALL",
+        "--security-opt",
+        "seccomp=unconfined",
+        "--network=host",
+        "--ipc=host",
+        "--privileged",
+        "--name",
+        "dev_container" // TODO: rename according to image name/container name
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "ms-vscode.cpptools-extension-pack",
+                "ms-python.python",
+                "visualstudioexptteam.vscodeintellicode",
+            ]       
+        }
+    }
+}
