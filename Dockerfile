@@ -1,3 +1,8 @@
+ARG REPOSITORY_NAME
+ARG ROOT_DIRECTORY=/root
+ARG WORKSPACE=${ROOT_DIRECTORY}/${REPOSITORY_NAME}
+ARG DISTRO=humble
+############################################### BASE IMAGE ###############################################
 FROM ubuntu:22.04 as BASE
 
 SHELL ["/bin/bash", "-c"]
@@ -16,3 +21,26 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,id=apt \
 
 # Copy Workspace into the container
 # COPY workspace /root/workspace
+
+############################################### PRODUCTION IMAGE ###############################################
+FROM BASE as PROD
+ARG REPOSITORY_NAME
+ARG ROOT_DIRECTORY
+ARG WORKSPACE
+ARG DISTRO
+
+# Add the build and remove source files
+
+############################################### DEVELOPMENT IMAGE ###############################################
+FROM BASE AS DEV
+ARG REPOSITORY_NAME
+ARG ROOT_DIRECTORY
+ARG WORKSPACE
+ARG DISTRO
+
+# additional thing needed but should not be in production
+
+
+# Set this for podman devcontainer mounting source code folder from host
+# otherwise there is warning dubious ownership
+RUN git config --global --add safe.directory "*"
