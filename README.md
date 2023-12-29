@@ -1,2 +1,2 @@
-# mbed-_development
+# mbed_development
 Mbed development
