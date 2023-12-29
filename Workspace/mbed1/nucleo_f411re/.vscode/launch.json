@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "showDevDebugOutput": "both",
+            "cwd": "${workspaceRoot}",
+            "executable": "${workspaceRoot}/BUILD/NUCLEO_F411RE/GCC_ARM-DEBUG/${workspaceRootFolderName}.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "preLaunchTask": "Build",
+            "device": "STM32F411",
+            "configFiles": [
+                "openocd.cfg"
+            ],
+            "runToEntryPoint": "main",
+        }
+    ]
+}
