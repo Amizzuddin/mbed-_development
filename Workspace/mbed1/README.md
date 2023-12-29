@@ -1,3 +1,8 @@
+# create new project
+```
+mbed new <PROJECT_NAME>
+```
+
 # configure
 ```
 mbed config -G GCC_ARM_PATH "/root/Dependencies/toolchain/bin"
