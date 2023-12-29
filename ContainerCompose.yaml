@@ -3,7 +3,8 @@ version: "3.3"
 services:
   development:
     container_name: mbed_development
-    image: localhost/mbed_development:latest
+    # image: localhost/mbed_development:latest
+    image: mbed_development:latest
     working_dir: /root/mbed_development/
     network_mode: "host"
     privileged: true
@@ -11,10 +12,13 @@ services:
     ipc: host
     devices:
       - /dev:/dev
+      - /dev/sdb:/dev/sdb
+      # - /mnt:/mnt
     security_opt:
       - seccomp:unconfined
     cap_add:
       - ALL
+      - CAP_SYS_ADMIN
     environment:
       DISPLAY: $DISPLAY
       ROS_LOCALHOST_ONLY: 1
@@ -24,6 +28,10 @@ services:
       - $HOME/.ssh:/root/mbed_development/.ssh
       - $HOME/.gitconfig:/root/mbed_development/.gitconfig
       - $PWD:/root/mbed_development/
+      - /dev/disk/by-id:/dev/disk/by-id
+      - /dev/serial/by-id:/dev/serial/by-id
+      - /run/udev:/run/udev:ro
+      - /mnt:/mnt
   
   # production:
   #   container_name: mbed_development
