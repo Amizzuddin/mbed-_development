@@ -1,8 +1,8 @@
 {
     "dockerComposeFile": "../ContainerCompose.yaml",
-    "service": "Development",
+    "service": "development",
     "remoteUser": "root",
-    "workspaceFolder": "/root/repository_name/src",
+    "workspaceFolder": "/root/mbed_development",
     // "initializeCommand": ".devcontainer/initialize_command.sh",
     // "postStartCommand": ".devcontainer/post_start_command.sh",
     "customizations": {
@@ -13,6 +13,10 @@
                 "ms-vscode.cpptools-extension-pack",
                 "ms-python.python",
                 "visualstudioexptteam.vscodeintellicode",
+                "bmd.stm32-for-vscode",
+                "marus25.cortex-debug",
+                "mcu-debug.debug-tracker-vscode",
+                "tomoki1207.pdf"
             ]       
         }
     }
