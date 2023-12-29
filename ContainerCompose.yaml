@@ -31,7 +31,6 @@ services:
       - /dev/disk/by-id:/dev/disk/by-id
       - /dev/serial/by-id:/dev/serial/by-id
       - /run/udev:/run/udev:ro
-      - /mnt:/mnt
   
   # production:
   #   container_name: mbed_development

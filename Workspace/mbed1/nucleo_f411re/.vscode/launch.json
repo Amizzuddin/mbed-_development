@@ -2,19 +2,42 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
-            "showDevDebugOutput": "both",
-            "cwd": "${workspaceRoot}",
-            "executable": "${workspaceRoot}/BUILD/NUCLEO_F411RE/GCC_ARM-DEBUG/${workspaceRootFolderName}.elf",
+            "name": "C++ Launch",
+            "type": "cppdbg",
             "request": "launch",
-            "type": "cortex-debug",
-            "servertype": "openocd",
-            "preLaunchTask": "Build",
-            "device": "STM32F411",
-            "configFiles": [
-                "openocd.cfg"
+            "program": "${workspaceRoot}/BUILD/${workspaceRootFolderName}.elf",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "debugServerArgs": "",
+            "serverLaunchTimeout": 20000,
+            "filterStderr": true,
+            "filterStdout": false,
+            "serverStarted": "GDB\\ server\\ started",
+            "preLaunchTask": "Debug Build",
+            "setupCommands": [
+                { "text": "-target-select remote localhost:3333", "description": "connect to target", "ignoreFailures": false },
+                { "text": "-file-exec-and-symbols ${workspaceRoot}/BUILD/${workspaceRootFolderName}.elf", "description": "load file", "ignoreFailures": false},
+                { "text": "-interpreter-exec console \"monitor endian little\"", "ignoreFailures": false },
+                { "text": "-interpreter-exec console \"monitor reset\"", "ignoreFailures": false },
+                { "text": "-interpreter-exec console \"monitor halt\"", "ignoreFailures": false },
+                { "text": "-interpreter-exec console \"monitor arm semihosting enable\"", "ignoreFailures": false },
+                { "text": "-target-download", "description": "flash target", "ignoreFailures": false }
             ],
-            "runToEntryPoint": "main",
+            "logging": {
+                "moduleLoad": true,
+                "trace": true,
+                "engineLogging": true,
+                "programOutput": true,
+                "exceptions": true
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/root/Dependencies/toolchain/bin/arm-none-eabi-gdb",
+                "debugServerPath": "pyocd-gdbserver"
+            }
         }
     ]
 }

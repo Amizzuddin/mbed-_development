@@ -37,6 +37,8 @@ RUN --mount=target=/var/lib/apt/lists,type=cache,id=apt \
     --mount=target=/var/cache/apt,type=cache,id=apt \
     apt-get update && apt-get install -y --no-install-recommends \
     mercurial
+    # \
+    # python3-pyocd
 
 # install python packages
 COPY requirements.txt .
@@ -53,6 +55,10 @@ ENV MBED_GCC_ARM_PATH="/root/Dependencies/toolchain/bin"
 RUN mkdir -p ~/.bash_completion.d
 RUN cp ~/Dependencies/mbed-cli/tools/bash_completion/mbed ~/.bash_completion.d
 RUN echo "source ~/.bash_completion.d/mbed" >> ~/.bashrc
+
+
+# pyocd target support
+RUN pyocd pack update && pyocd pack install stm32f411retx
 
 # Set this for podman devcontainer mounting source code folder from host
 # otherwise there is warning dubious ownership

@@ -1,9 +1,11 @@
 {
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "name": "mbed",
     "tasks": [
         {
-            "label": "Build",
+            "label": "Flash Build",
             "type": "shell",
             "problemMatcher": {
                 "owner": "cpp",
@@ -22,11 +24,10 @@
             },
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             },
             "args": [
                 "compile",
-                "--profile=debug",
                 "-t",
                 "GCC_ARM",
                 "-m",
@@ -35,11 +36,56 @@
             "linux": {
                 "command": "mbed"
             },
-            "osx": {
-                "command": "mbed"
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "Flash",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": false
             },
-            "windows": {
-                "command": "mbed"
+            "args": [
+                "flash",
+                "-t",
+                "STM32F411RETx",
+                "${workspaceRoot}/BUILD/NUCLEO_F411RE/GCC_ARM/${workspaceRootFolderName}.bin"
+            ],
+            "linux": {
+                "command": "pyocd"
+            }
+        },
+        {
+            "label": "Debug Build",
+            "type": "shell",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}/mbed-os"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "args": ["-j"],
+            "linux": {
+                "command": "make"
             },
             "presentation": {
                 "echo": false,
