@@ -7,3 +7,4 @@ Mbed development
 # Notes
 - At time of writing, mbed1 is tested but not mbed2
 - adding new project requires to remove .git in the new workspace folder
+- both mbed1 and mbed2 somehow have issue to flash using the default cli command. thus, pyocd is used to flash instead
