@@ -60,6 +60,9 @@ RUN echo "source ~/.bash_completion.d/mbed" >> ~/.bashrc
 # pyocd target support
 RUN pyocd pack update && pyocd pack install stm32f411retx
 
+# mbed1 configuration
+RUN mbed config -G GCC_ARM_PATH "/root/Dependencies/toolchain/bin"
+
 # Set this for podman devcontainer mounting source code folder from host
 # otherwise there is warning dubious ownership
 # RUN git config --global --add safe.directory "*"

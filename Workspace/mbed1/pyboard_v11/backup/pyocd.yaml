@@ -1,0 +1,8 @@
+probes:
+  320043001600004A5735534E: # Probe's unique ID.
+    target_override:  stm32f405xg
+    # test_binary:      stm32l475vg_iot01a.bin
+
+# Global options
+# auto_unlock: false
+# frequency: 8000000 # Set 8 MHz SWD default for all probes

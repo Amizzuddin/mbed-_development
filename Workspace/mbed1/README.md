@@ -27,7 +27,14 @@ pyocd pack update
 pyocd pack install <target>
 ```
 ## Remarks
-At the moment of writing, debugger in vscode cant seems to breakpoint on certain portion. will need more time to understand
+- debugger in vscode cant seems to breakpoint on certain portion. will need more time to understand
+- debugging with custom board will cause some fault handling error
+
+# TODO
+- Address the Debugging and Flash issue on custom board
+- Unify mbed-os and place them on External folder which create system link
+- create a script that automoted project creation
+
 
 # Referrences
 ## Debugging setup

@@ -1,12 +1,12 @@
 {
 	"folders": [
 		{
-			"name": "nucleo_f411re",
-			"path": "../Workspace/mbed1/nucleo_f411re"
-		},
-		{
 			"name": "pyboard_v11",
 			"path": "../Workspace/mbed1/pyboard_v11"
+		},
+		{
+			"name": "nucleo_f411re",
+			"path": "../Workspace/mbed1/nucleo_f411re"
 		},
 		{
 			"name": "mbed_development",
