@@ -1,3 +1,4 @@
 ROOT=.
 TARGET=PYBOARD_V11
 TOOLCHAIN=GCC_ARM
+MBED_OS_DIR=../../../Externals/mbed-os

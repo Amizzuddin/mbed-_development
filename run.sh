@@ -4,6 +4,10 @@
 # 1) Clone submodules (if any)
 # 2) Build image and tag according to <repository_name>:<version>
 
+initialize_repository(){
+    git submodule update --init --recursive
+}
+
 get_repository_name(){
     REPOSITORY_NAME=$(basename -s .git `git config --get remote.origin.url`)
     echo $REPOSITORY_NAME # Print the 'return value' to stdout
@@ -42,4 +46,5 @@ build_image(){
     bash build_image.sh podman $IMAGE_NAME $TAG
 }
 
+initialize_repository
 build_image

@@ -1,0 +1,160 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "name": "mbed_cli1",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}/mbed-os",
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "command": "mbed",
+            "args": [
+                "compile",
+                "-t",
+                "GCC_ARM",
+                "-m",
+                "${input:selectMicrocontroller}",
+                "--build",
+                "${fileWorkspaceFolder}/BUILD/FLASH",
+            ],
+            "options": {
+                "cwd": "${fileWorkspaceFolder}"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "Flash",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "command": "${input:selectOnChipDebugger} ${input:ocdCommandArgs}",
+            // "command": "${input:selectOnChipDebugger}",
+            "args": 
+            [
+                // "${input:ocdCommandArgs}"
+            ],
+            "dependsOn": ["Build"]
+        },
+        {
+            "label": "Debug Build",
+            "type": "shell",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceRoot}/mbed-os"
+                ],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "args": ["-j"],
+            "linux": {
+                "command": "make"
+            },
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "clear": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "selectMicrocontroller",
+            "type": "command",
+            "command": "extension.commandvariable.pickStringRemember",
+            "args": 
+            {
+                "description": "Select the board",
+                "key": "target",
+                "fileName": "${workspaceFolder}/../../../.vscode/supported_microcontroller.json",
+                "fileFormat": "json",
+                "jsonOption": 
+                {
+                    "label": "content.Microcontrollers[__itemIdx__].name",
+                    "description": "content.Microcontrollers[__itemIdx__].description",
+                    "value": 
+                    {
+                        "target": "content.Microcontrollers[__itemIdx__].target",
+                    }
+                }
+            }
+        },
+        {
+            "id": "selectOnChipDebugger",
+            "type": "command",
+            "command": "extension.commandvariable.pickStringRemember",
+            "args": 
+            {
+                "description": "Select On-Chip Debugger",
+                "key": "ocd_command",
+                "fileName": "${workspaceFolder}/../../../.vscode/on_chip_debuggers.json",
+                "fileFormat": "json",
+                "jsonOption": 
+                {
+                    "label": "content.OnChipDebuggers[__itemIdx__].name",
+                    "description": "content.OnChipDebuggers[__itemIdx__].description",
+                    "value": 
+                    {
+                        "ocd_command": "content.OnChipDebuggers[__itemIdx__].command",
+                        "ocd_command_args": "content.OnChipDebuggers[__itemIdx__].args"
+                    }
+                }
+            }
+        },
+        {
+            "id": "ocdCommandArgs",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": 
+            { 
+                "key": "ocd_command_args",
+                "transform": 
+                {
+                    "text": "${remember:ocd_command_args}",
+                    "find": "<TARGET>",
+                    "replace": "${remember:target}"
+                }
+            }
+        }
+    ]
+}

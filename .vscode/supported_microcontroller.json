@@ -1,0 +1,15 @@
+{
+    "Microcontrollers":
+    [
+        {
+            "name": "pyboard v1.1",
+            "description": "pyboard clone by VCC-GND",
+            "target": "pyboard_v11"
+        },
+        {
+            "name": "Nucleo F411RE",
+            "description": "STM32 Nucleo Board",
+            "target": "nucleo_f411re"
+        }
+    ]
+}

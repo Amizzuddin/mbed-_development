@@ -14,6 +14,8 @@
 		}
 	],
 	"settings": {
+		// "terminal.integrated.scrollback": 1000,
+		"C_Cpp.intelliSenseEngine": "Tag Parser",
 		"cortex-debug.armToolchainPath": "/root/Dependencies/toolchain/bin",
 		"cortex-debug.openocdPath": "/usr/bin/openocd",
 		"cortex-debug.gdbPath": "/root/Dependencies/toolchain/bin/arm-none-eabi-gdb",

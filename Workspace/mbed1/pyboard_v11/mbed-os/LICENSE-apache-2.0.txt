@@ -1,0 +1,1 @@
+../../../../Externals/mbed-os/LICENSE-apache-2.0.txt
