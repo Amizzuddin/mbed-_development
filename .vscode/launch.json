@@ -2,42 +2,80 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "pyOCD Launch Debug",
-            "type": "cppdbg",
+            "name": "Debug",
+            "showDevDebugOutput": "both",
+            "cwd": "${fileWorkspaceFolder}",
+            "executable": "./BUILD/FLASH/${input:selectMicrocontroller}.elf",
             "request": "launch",
-            "program": "${workspaceRoot}/BUILD/${workspaceRootFolderName}.elf",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceRoot}",
-            "environment": [],
-            "externalConsole": false,
-            "debugServerArgs": "-b 320043001600004a5735534e",
-            "serverLaunchTimeout": 20000,
-            "filterStderr": true,
-            "filterStdout": false,
-            "serverStarted": "GDB\\ server\\ started",
-            "preLaunchTask": "Debug Build",
-            "setupCommands": [
-                { "text": "-target-select remote localhost:3333", "description": "connect to target", "ignoreFailures": false },
-                { "text": "-file-exec-and-symbols ${workspaceRoot}/BUILD/${workspaceRootFolderName}.elf", "description": "load file", "ignoreFailures": false},
-                { "text": "-interpreter-exec console \"monitor endian little\"", "ignoreFailures": false },
-                { "text": "-interpreter-exec console \"monitor reset\"", "ignoreFailures": false },
-                { "text": "-interpreter-exec console \"monitor halt\"", "ignoreFailures": false },
-                { "text": "-interpreter-exec console \"monitor arm semihosting enable\"", "ignoreFailures": false },
-                { "text": "-target-download", "description": "flash target", "ignoreFailures": false }
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            // "preLaunchTask": "Build",
+            "device": "${remember:device}",
+            "configFiles": [
+                "${input:selectOnChipDebugger}"
             ],
-            "logging": {
-                "moduleLoad": true,
-                "trace": true,
-                "engineLogging": true,
-                "programOutput": true,
-                "exceptions": true
-            },
-            "linux": {
-                "MIMode": "gdb",
-                "miDebuggerPath": "/root/Dependencies/toolchain/bin/arm-none-eabi-gdb",
-                "debugServerPath": "pyocd-gdbserver"
-            }
+            "runToEntryPoint": "main"
         }
+        // {
+        //     "name": "Debug STM32",
+        //     "showDevDebugOutput": "both",
+        //     "cwd": "${fileWorkspaceFolder}",
+        //     "executable": "./BUILD/FLASH/pyboard_v11.elf",
+        //     "request": "launch",
+        //     "type": "cortex-debug",
+        //     "servertype": "openocd",
+        //     // "preLaunchTask": "Build STM",
+        //     "device": "STM32F405",
+        //     "configFiles": [
+        //         "openocd.cfg"
+        //     ],
+        //     "runToEntryPoint": "main"
+        // },
+    ],
+    "inputs": [
+        {
+            "id": "selectMicrocontroller",
+            "type": "command",
+            "command": "extension.commandvariable.pickStringRemember",
+            "args": 
+            {
+                "description": "Select the board",
+                "key": "target",
+                "fileName": "${workspaceFolder}/../../../.vscode/supported_microcontroller.json",
+                "fileFormat": "json",
+                "jsonOption": 
+                {
+                    "label": "content.Microcontrollers[__itemIdx__].name",
+                    "description": "content.Microcontrollers[__itemIdx__].description",
+                    "value": 
+                    {
+                        "device": "content.Microcontrollers[__itemIdx__].device",
+                        "target": "content.Microcontrollers[__itemIdx__].target",
+                    }
+                }
+            }
+        },
+        {
+            "id": "selectOnChipDebugger",
+            "type": "command",
+            "command": "extension.commandvariable.pickStringRemember",
+            "args": 
+            {
+                "description": "Select On-Chip Debugger",
+                "key": "ocd_command",
+                "fileName": "${workspaceFolder}/../../../.vscode/on_chip_debuggers.json",
+                "fileFormat": "json",
+                "jsonOption": 
+                {
+                    "label": "content.OnChipDebuggers[__itemIdx__].name",
+                    "description": "content.OnChipDebuggers[__itemIdx__].description",
+                    "value": 
+                    {
+                        "ocd_command": "content.OnChipDebuggers[__itemIdx__].command",
+                        "ocd_config_file": "content.OnChipDebuggers[__itemIdx__].config_file"
+                    }
+                }
+            }
+        },
     ]
 }

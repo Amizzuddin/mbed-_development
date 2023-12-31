@@ -4,12 +4,14 @@
         {
             "name": "pyboard v1.1",
             "description": "pyboard clone by VCC-GND",
-            "target": "pyboard_v11"
+            "target": "pyboard_v11",
+            "device": "STM32F405"
         },
         {
             "name": "Nucleo F411RE",
             "description": "STM32 Nucleo Board",
-            "target": "nucleo_f411re"
+            "target": "nucleo_f411re",
+            "device": "STM32F411"
         }
     ]
 }
