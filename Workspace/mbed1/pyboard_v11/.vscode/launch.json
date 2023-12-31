@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Debug",
+            "name": "pyOCD Launch Debug",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceRoot}/BUILD/${workspaceRootFolderName}.elf",

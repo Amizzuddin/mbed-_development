@@ -45,7 +45,7 @@
             }
         },
         {
-            "label": "Flash",
+            "label": "pyOCD Flash",
             "type": "shell",
             "group": {
                 "kind": "build",
@@ -62,7 +62,24 @@
             }
         },
         {
-            "label": "Debug Build",
+            "label": "openOCD Flash",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "args": [
+                "-f",
+                "${workspaceRoot}/openocd.cfg",
+                "-c",
+                "program ${workspaceRoot}/BUILD/PYBOARD_V11/GCC_ARM/${workspaceRootFolderName}.bin 0x08000000 verify reset exit"
+            ],
+            "linux": {
+                "command": "openocd"
+            }
+        },
+        {
+            "label": "Mbed Debug Build",
             "type": "shell",
             "problemMatcher": {
                 "owner": "cpp",
@@ -95,5 +112,6 @@
                 "clear": true
             }
         }
+
     ]
 }

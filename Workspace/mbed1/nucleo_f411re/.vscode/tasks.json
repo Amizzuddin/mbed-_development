@@ -62,6 +62,23 @@
             }
         },
         {
+            "label": "openOCD Flash",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "args": [
+                "-f",
+                "${workspaceRoot}/openocd.cfg",
+                "-c",
+                "program ${workspaceRoot}/BUILD/NUCLEO_F411RE/GCC_ARM/${workspaceRootFolderName}.bin 0x08000000 verify reset exit"
+            ],
+            "linux": {
+                "command": "openocd"
+            }
+        },
+        {
             "label": "Debug Build",
             "type": "shell",
             "problemMatcher": {
