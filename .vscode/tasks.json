@@ -61,40 +61,6 @@
                 // "${input:ocdCommandArgs}"
             ],
             "dependsOn": ["Build"]
-        },
-        {
-            "label": "Debug Build",
-            "type": "shell",
-            "problemMatcher": {
-                "owner": "cpp",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}/mbed-os"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            },
-            "args": ["-j"],
-            "linux": {
-                "command": "make"
-            },
-            "presentation": {
-                "echo": false,
-                "reveal": "always",
-                "focus": false,
-                "panel": "shared",
-                "clear": true
-            }
         }
     ],
     "inputs": [

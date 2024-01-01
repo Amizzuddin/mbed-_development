@@ -16,21 +16,6 @@
             ],
             "runToEntryPoint": "main"
         }
-        // {
-        //     "name": "Debug STM32",
-        //     "showDevDebugOutput": "both",
-        //     "cwd": "${fileWorkspaceFolder}",
-        //     "executable": "./BUILD/FLASH/pyboard_v11.elf",
-        //     "request": "launch",
-        //     "type": "cortex-debug",
-        //     "servertype": "openocd",
-        //     // "preLaunchTask": "Build STM",
-        //     "device": "STM32F405",
-        //     "configFiles": [
-        //         "openocd.cfg"
-        //     ],
-        //     "runToEntryPoint": "main"
-        // },
     ],
     "inputs": [
         {
