@@ -115,6 +115,7 @@
                     "value": 
                     {
                         "target": "content.Microcontrollers[__itemIdx__].target",
+                        "device": "content.Microcontrollers[__itemIdx__].device",
                     }
                 }
             }
@@ -136,7 +137,8 @@
                     "value": 
                     {
                         "ocd_command": "content.OnChipDebuggers[__itemIdx__].command",
-                        "ocd_command_args": "content.OnChipDebuggers[__itemIdx__].args"
+                        "ocd_command_args": "content.OnChipDebuggers[__itemIdx__].args",
+                        "ocd_config_file": "content.OnChipDebuggers[__itemIdx__].config_file"
                     }
                 }
             }

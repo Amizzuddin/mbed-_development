@@ -5,14 +5,14 @@
             "name": "Debug",
             "showDevDebugOutput": "both",
             "cwd": "${fileWorkspaceFolder}",
-            "executable": "./BUILD/FLASH/${input:selectMicrocontroller}.elf",
+            "executable": "./BUILD/FLASH/${input:selectedTarget}.elf",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
-            // "preLaunchTask": "Build",
-            "device": "${remember:device}",
+            "preLaunchTask": "Build",
+            "device": "${input:selectedDevice}",
             "configFiles": [
-                "${input:selectOnChipDebugger}"
+                "${input:selectedConfigFile}"
             ],
             "runToEntryPoint": "main"
         }
@@ -34,48 +34,40 @@
     ],
     "inputs": [
         {
-            "id": "selectMicrocontroller",
+            "id": "selectedTarget",
             "type": "command",
-            "command": "extension.commandvariable.pickStringRemember",
+            "command": "extension.commandvariable.remember",
             "args": 
             {
-                "description": "Select the board",
                 "key": "target",
-                "fileName": "${workspaceFolder}/../../../.vscode/supported_microcontroller.json",
-                "fileFormat": "json",
-                "jsonOption": 
-                {
-                    "label": "content.Microcontrollers[__itemIdx__].name",
-                    "description": "content.Microcontrollers[__itemIdx__].description",
-                    "value": 
-                    {
-                        "device": "content.Microcontrollers[__itemIdx__].device",
-                        "target": "content.Microcontrollers[__itemIdx__].target",
-                    }
-                }
             }
         },
         {
-            "id": "selectOnChipDebugger",
+            "id": "selectedDevice",
             "type": "command",
-            "command": "extension.commandvariable.pickStringRemember",
+            "command": "extension.commandvariable.remember",
             "args": 
             {
-                "description": "Select On-Chip Debugger",
-                "key": "ocd_command",
-                "fileName": "${workspaceFolder}/../../../.vscode/on_chip_debuggers.json",
-                "fileFormat": "json",
-                "jsonOption": 
-                {
-                    "label": "content.OnChipDebuggers[__itemIdx__].name",
-                    "description": "content.OnChipDebuggers[__itemIdx__].description",
-                    "value": 
-                    {
-                        "ocd_command": "content.OnChipDebuggers[__itemIdx__].command",
-                        "ocd_config_file": "content.OnChipDebuggers[__itemIdx__].config_file"
-                    }
-                }
+                "key": "device",
             }
         },
+        {
+            "id": "selectedOCD",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": 
+            {
+                "key": "ocd_command",
+            }
+        },
+        {
+            "id": "selectedConfigFile",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": 
+            {
+                "key": "ocd_config_file",
+            }
+        }
     ]
 }
