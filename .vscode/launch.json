@@ -5,7 +5,7 @@
             "name": "[OpenOCD] Debug",
             "showDevDebugOutput": "both",
             "cwd": "${fileWorkspaceFolder}",
-            "executable": "./BUILD/FLASH/${input:selectedTarget}.elf",
+            "executable": "./BUILD/${input:selectedTarget}.elf",
             "request": "launch",
             "type": "cortex-debug",
             "servertype": "openocd",
