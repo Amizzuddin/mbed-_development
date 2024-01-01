@@ -11,7 +11,7 @@
                 "owner": "cpp",
                 "fileLocation": [
                     "relative",
-                    "${workspaceRoot}/mbed-os",
+                    "${fileWorkspaceFolder}/mbed-os",
                 ],
                 "pattern": {
                     "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
@@ -34,7 +34,7 @@
                 "-m",
                 "${input:selectMicrocontroller}",
                 "--build",
-                "${fileWorkspaceFolder}/BUILD/FLASH",
+                "./BUILD",
             ],
             "options": {
                 "cwd": "${fileWorkspaceFolder}"
@@ -60,6 +60,9 @@
             [
                 // "${input:ocdCommandArgs}"
             ],
+            // "options": {
+            //     "cwd": "${fileWorkspaceFolder}"
+            // },
             "dependsOn": ["Build"]
         }
     ],
@@ -110,6 +113,21 @@
             }
         },
         {
+            "id": "ocdCommand",
+            "type": "command",
+            "command": "extension.commandvariable.remember",
+            "args": 
+            { 
+                "key": "ocd_command_args",
+                "transform": 
+                {
+                    "text": "${remember:ocd_command}",
+                    "find": "<TARGET>",
+                    "replace": "${remember:target}"
+                }
+            }
+        },
+        {
             "id": "ocdCommandArgs",
             "type": "command",
             "command": "extension.commandvariable.remember",
@@ -123,6 +141,6 @@
                     "replace": "${remember:target}"
                 }
             }
-        }
+        },
     ]
 }

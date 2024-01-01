@@ -4,14 +4,14 @@
             "name": "pyOCD",
             "description": "Python On-Chip Debugger",
             "command": "pyocd",
-            "args": "flash --probe 320043001600004a5735534e ${fileWorkspaceFolder}/BUILD/FLASH/<TARGET>.bin",
+            "args": "flash --probe 320043001600004a5735534e ${fileWorkspaceFolder}/BUILD/<TARGET>.bin",
             "config_file": "pyocd.yaml"
         },
         {
             "name": "openOCD",
             "description": "Open source On-Chip Debugger",
             "command": "openocd",
-            "args": "-f ${workspaceRoot}/openocd.cfg -c \"program ${workspaceRoot}/BUILD/FLASH/<TARGET>.bin 0x08000000 verify reset exit\"",
+            "args": "-f ${workspaceFolder}/openocd.cfg -c \"program ${workspaceFolder}/BUILD/<TARGET>.bin 0x08000000 verify reset exit\"",
             "config_file": "openocd.cfg"
         }
     ]

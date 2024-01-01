@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
+            "name": "[OpenOCD] Debug",
             "showDevDebugOutput": "both",
             "cwd": "${fileWorkspaceFolder}",
             "executable": "./BUILD/FLASH/${input:selectedTarget}.elf",
@@ -12,47 +12,41 @@
             "preLaunchTask": "Build",
             "device": "${input:selectedDevice}",
             "configFiles": [
-                "${input:selectedConfigFile}"
+                "openocd.cfg"
             ],
-            "runToEntryPoint": "main"
-        }
+            "runToEntryPoint": "main",
+        },
+        // {
+        //     "name": "[PyOCD] Debug",
+        //     "showDevDebugOutput": "both",
+        //     "cwd": "${fileWorkspaceFolder}",
+        //     "executable": "./BUILD/FLASH/${input:selectedTarget}.elf",
+        //     "request": "launch",
+        //     "type": "cortex-debug",
+        //     "servertype": "pyocd",
+        //     "serverArgs": [
+        //         "gdbserver"
+        //     ],
+        //     "preLaunchTask": "PreDebugBuild",
+        //     "device": "${input:selectedDevice}",
+        //     "configFiles": [
+        //         "pyocd.yaml"
+        //     ],
+        //     "runToEntryPoint": "main",
+        // }
     ],
     "inputs": [
         {
             "id": "selectedTarget",
             "type": "command",
             "command": "extension.commandvariable.remember",
-            "args": 
-            {
-                "key": "target",
-            }
+            "args": {"key": "target"},
         },
         {
             "id": "selectedDevice",
             "type": "command",
             "command": "extension.commandvariable.remember",
-            "args": 
-            {
-                "key": "device",
-            }
+            "args": {"key": "device"},
         },
-        {
-            "id": "selectedOCD",
-            "type": "command",
-            "command": "extension.commandvariable.remember",
-            "args": 
-            {
-                "key": "ocd_command",
-            }
-        },
-        {
-            "id": "selectedConfigFile",
-            "type": "command",
-            "command": "extension.commandvariable.remember",
-            "args": 
-            {
-                "key": "ocd_config_file",
-            }
-        }
     ]
 }
